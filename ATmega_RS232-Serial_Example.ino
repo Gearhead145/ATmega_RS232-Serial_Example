@@ -56,7 +56,7 @@ void USART_init(void)
   110 9-bit
   */
  
-  //Enable receiver and 
+  //Enable receiver and transmitter
   UCSR0B = ( (1 << RXEN0) | (1 << TXEN0) );
 }
 
@@ -77,7 +77,9 @@ unsigned char USART_Recieve(void)
 
 void setup() {
   // put your setup code here, to run once:
-
+  
+  //Initialize Registers for Send and Recieve by calling our function
+  USART_init();
 }
 
 void loop() {
