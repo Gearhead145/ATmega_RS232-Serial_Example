@@ -28,18 +28,18 @@ BAUD     U2X0=0    U2X0=1
 //  and for ATMega 2560 Register Sheet 
 //  http://www.atmel.com/images/atmel-2549-8-bit-avr-microcontroller-atmega640-1280-1281-2560-2561_datasheet.pdf
 
-void USART_init(void)
-{
+void USART_init(void){
   //Set the baud rate prescale register
   UBRR0 = BAUD_PRESCALER;
 
   //Now set Frame Size
-  UCSR0C = ( (1 << USBS0) | (1 << UCSZ01) | (1 << UCSZ00) |  );
-  //          1->2stop bts   1 frm bit 1     0 frm bit 0             
+  //Bits = Bts shown in the order 
+  UCSR0C = ( (1 << USBS0) | (1 << UCSZ01) | (1 << UCSZ00) );
+  //          1->2stop bts   1 frame bit 1   1 frame bit 0             
   //          0->1stop bt 
   
   UCSR0B = (0 << UCSZ02);
-  // frm bit 2
+  //        0 frame bit 2
  
   /*For us we are communicating with a Morningstar Sunsaver
   According to Morningstars documentation they use 8 data bits 
@@ -66,19 +66,25 @@ UCSZ
   UCSR0B = ( (1 << RXEN0) | (1 << TXEN0) );
 }
 
-void USART_send(unsigned char data)
-{
+void USART_send(unsigned char data){
   //While the transmit buffer is not empty loop
   while( !(UCSR0A & (1 << UDRE0) ) );
   //when the buffer is empty write data to the transferred
   UDR0 = data;
 }
 
-unsigned char USART_Recieve(void)
-{  //wait for data to be recieved
+unsigned char USART_Recieve(void){
+  //wait for data to be recieved
   while( !(UCSR0A & (1 << RXC0) ) );
   //Get and return received data from buffer
   return UDR0;
+}
+
+void USART_putstring(char* StringPtr){
+  while(*StringPtr != 0x00){
+    USART_send(*StringPtr);
+    StringPtr++;
+  }
 }
 
 void setup() {
@@ -86,7 +92,7 @@ void setup() {
   
   //Initialize Registers for Send and Recieve by calling our function
   USART_init();
-  USART_send('RS232 RX TX 0 GO!');
+  USART_putstring("RS232 RX TX 0 GO!");
 }
 
 void loop() {
@@ -96,6 +102,6 @@ void loop() {
   data = USART_Recieve();
 
   if(data != 0){
-  USART_send(0x61);
+  USART_send(data);
   }
 }
