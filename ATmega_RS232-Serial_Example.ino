@@ -34,9 +34,13 @@ void USART_init(void)
   UBRR0 = BAUD_PRESCALER;
 
   //Now set Frame Size
-  UCSR0C = ( (0 << USBS0) | (0 << UCSZ01) | (1<<UCSZ00) );
-  //                0             0              1
+  UCSR0C = ( (1 << USBS0) | (1 << UCSZ01) | (1 << UCSZ00) |  );
+  //          1->2stop bts   1 frm bit 1     0 frm bit 0             
+  //          0->1stop bt 
   
+  UCSR0B = (0 << UCSZ02);
+  // frm bit 2
+ 
   /*For us we are communicating with a Morningstar Sunsaver
   According to Morningstars documentation they use 8 data bits 
   and 2 Stop Bits with no parity. Frame Size is set to 001 to 
@@ -45,15 +49,17 @@ void USART_init(void)
   frames to recieve all the information from the morningstar device
   this means we will have xxxxSS and xxxxSS to read the 8 databits
   and hence 2 6 bit data frames 
-  
-  000 5-bit
-  001 6-bit
-  010 7-bit
-  011 8-bit
-  100  ---
-  101  ---
-  110  ---
-  110 9-bit
+
+UCSZ
+  00 01 02
+  0  0  0 5-bit
+  0  0  1 6-bit
+  0  1  0 7-bit
+  0  1  1 8-bit
+  1  0  0  ---
+  1  0  1  ---
+  1  1  0  ---
+  1  1  0 9-bit
   */
  
   //Enable receiver and transmitter
@@ -85,5 +91,11 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  USART_send('Test123\n');
+  
+  unsigned char data = 0;
+  data = USART_Recieve();
+
+  if(data != 0){
+  USART_send(0x61);
+  }
 }
