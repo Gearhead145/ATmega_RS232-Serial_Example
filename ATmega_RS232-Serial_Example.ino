@@ -34,7 +34,7 @@ void USART_init(void)
   UBRR0 = BAUD_PRESCALER;
 
   //Now set Frame Size
-  UCSR0C = ( (0 << USBS0) | (0 << UCSZ11) | (1<<UCSZ00) );
+  UCSR0C = ( (0 << USBS0) | (0 << UCSZ01) | (1<<UCSZ00) );
   //                0             0              1
   
   /*For us we are communicating with a Morningstar Sunsaver
@@ -80,9 +80,10 @@ void setup() {
   
   //Initialize Registers for Send and Recieve by calling our function
   USART_init();
+  USART_send('RS232 RX TX 0 GO!');
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  USART_send('Test123\n');
 }
