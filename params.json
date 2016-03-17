@@ -1,0 +1,6 @@
+{
+  "name": "Atmega rs232-serial example",
+  "tagline": "ATmega RS232 Serial Example",
+  "body": "by Daniel Corda\r\n\r\nCredit for Serial Read and Write Basics goes to Robert Paz\r\nhttps://www.youtube.com/watch?v=W5xt6w5EMP0\r\n\r\nFor more Documentation go read the Code :)\r\n\r\nThis example was creates the basics to emulate rs232 communications\r\n\r\nThe authors intention with the next repo is to implement the\r\nknowledge acquired here for communicating with a Morningstar Sunsaver MPPT \r\nover DB9 to RJ11\r\n\r\nFlow Control using RTS and CTS are not implemented but can be added easily\r\n\r\nSettings for this device are: \r\n\r\n9600 baud\r\n8 databits\r\ntwo stop bits\r\nno parity bit\r\n\r\nsend questions to etiloconte@gmail.com\r\nI will get back to you, this account will\r\nalways exist unless google ceases to. \r\n\r\nCheers\r\nDan",
+  "note": "Don't delete this file! It's used internally to help with page regeneration."
+}
