@@ -2,6 +2,33 @@
 // Credit for Serial Read and Write Basics goes to Robert Paz
 // https://www.youtube.com/watch?v=W5xt6w5EMP0
 
+/*This program is setup for Arduino UNO using Atmel328p-pu and an DB-9 
+ levelshifter such as https://www.sparkfun.com/products/133
+ **The above level shifter does not have RTS/CTS pins for flow control. 
+ **If your application need flow control, make sure to purchase one that 
+ has the appropriate RTS/CTS pins.
+ 
+ One with Flow Control (They also sell a male variant)
+ http://www.amazon.com/Ultra-Compact-RS232-Converter-Female/dp/B00OPTOKI0/ref=pd_sim_328_4?ie=UTF8&dpID=41JLqBZikFL&dpSrc=sims&preST=_AC_UL160_SR160%2C160_&refRID=0Q4E692QJPHN0YVSWT1C
+  
+ This code It will work on other ATMEL and TI variants with small modifications
+ ***If using a chip with only 1 Rx/Tx pair Arduino UNO you will need to unplug your 
+ levelshifter and plug in USB power when you upload code. Arduino UNO uses the Serial
+ RX/TX pair during code upload. You can plug your levelshifter back-in once the code
+ uploaded.  
+
+ DB9 to USB Serial Adapter
+ Connects to the level shifter and allows your computer to talk to the microcontroller 
+ http://www.amazon.com/gp/product/B00BUZ0K68?psc=1&redirect=true&ref_=oh_aui_detailpage_o00_s00
+
+
+ DTE Serial Terminal
+ While you can use the arduino Serial Monitor to recieve data. Realterm makes it initially easier
+ to check if your frame size and stop bits are set properly.
+ https://sourceforge.net/projects/realterm/?source=typ_redirect
+*/
+
+
 //This defines the 9600 Baud Rate
 //You will need to change the hex code if communicating at another rate
 #define BAUD_PRESCALER 0x0067
