@@ -1,13 +1,19 @@
 by Daniel Corda
-Please Use as you see fit
 
-This example was created to emulate communications
-with a Morningstar Sunsaver MPPT over DB9 to RJ11
+Credit for Serial Read and Write Basics goes to Robert Paz
+https://www.youtube.com/watch?v=W5xt6w5EMP0
 
-Flow Control using RTS and CTS are not implemented
-but can be added easily
+For more Documentation go read the Code :)
 
-Settings for this device are 
+This example was creates the basics to emulate rs232 communications
+
+The authors intention with the next repo is to implement the
+knowledge acquired here for communicating with a Morningstar Sunsaver MPPT 
+over DB9 to RJ11
+
+Flow Control using RTS and CTS are not implemented but can be added easily
+
+Settings for this device are: 
 
 9600 baud
 8 databits
